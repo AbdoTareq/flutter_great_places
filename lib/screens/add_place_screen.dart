@@ -1,11 +1,50 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_great_places/widgets/image_input.dart';
+import 'dart:io';
 
-class AddPlaceScreen extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter_great_places/providers/great_places_provider.dart';
+import 'package:flutter_great_places/widgets/image_input.dart';
+import 'package:provider/provider.dart';
+
+class AddPlaceScreen extends StatefulWidget {
   static const routeName = '/AddPlaceScreen';
+
+  @override
+  _AddPlaceScreenState createState() => _AddPlaceScreenState();
+}
+
+class _AddPlaceScreenState extends State<AddPlaceScreen> {
+  File _pickedImage;
+  TextEditingController _controller = TextEditingController();
+
+  _selectImage(File pickedImage) {
+    _pickedImage = pickedImage;
+  }
+
+  _savePlace() {
+    if (_controller.text.isEmpty || _pickedImage == null) {
+      showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+                title: Text('Please enter fields'),
+                content: Text('Please enter missing fields'),
+                actions: [
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('Ok'),
+                  )
+                ],
+              ));
+      return;
+    }
+    Provider.of<GreatPlacesProvider>(context,listen: false)
+        .addPlace(_controller.text, _pickedImage);
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController _controller;
     return Scaffold(
       appBar: AppBar(
         title: Text('Add a New Place'),
@@ -22,9 +61,10 @@ class AddPlaceScreen extends StatelessWidget {
                     child: TextField(
                       decoration: InputDecoration(labelText: 'Title'),
                       controller: _controller,
+
                     ),
                   ),
-                  ImageInput(),
+                  ImageInput(_selectImage),
                 ],
               ),
             ),
@@ -33,7 +73,7 @@ class AddPlaceScreen extends StatelessWidget {
             elevation: 0,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             color: Theme.of(context).accentColor,
-            onPressed: () {},
+            onPressed: _savePlace,
             icon: Icon(Icons.add),
             label: Text('Add Place'),
           )
