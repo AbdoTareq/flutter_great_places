@@ -24,6 +24,13 @@ dependencies:
   flutter:
     sdk: flutter
   provider: ^4.3.2+2
+  image_picker: ^0.6.7+7
+  # to store image in device
+  path: ^1.7.0
+  path_provider: ^1.6.14
+
+
+
 
 
 
