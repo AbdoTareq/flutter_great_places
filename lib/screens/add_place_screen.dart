@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_great_places/providers/great_places_provider.dart';
 import 'package:flutter_great_places/widgets/image_input.dart';
+import 'package:flutter_great_places/widgets/location_input.dart';
 import 'package:provider/provider.dart';
 
 class AddPlaceScreen extends StatefulWidget {
@@ -65,6 +66,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                     ),
                   ),
                   ImageInput(_selectImage),
+                  LocationInput(),
                 ],
               ),
             ),
