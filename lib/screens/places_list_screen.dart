@@ -19,24 +19,35 @@ class PlacesListScreen extends StatelessWidget {
                 })
           ],
         ),
-        body: Consumer<GreatPlacesProvider>(
-          child: Center(
-            child: Container(
-              child: Text('Please add a location'),
-            ),
-          ),
-          builder: (ctx, placesProvider, ch) => placesProvider.places.isEmpty
-              ? ch
-              : ListView.builder(
-                  itemCount: placesProvider.places.length,
-                  itemBuilder: (ctx, i) => ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage:
-                          FileImage(placesProvider.places[i].image),
+        body: FutureBuilder(
+          future: Provider.of<GreatPlacesProvider>(context, listen: false)
+              .fetchAndSetPlaces(),
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) =>
+              snapshot.connectionState == ConnectionState.waiting
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Consumer<GreatPlacesProvider>(
+                      child: Center(
+                        child: Container(
+                          child: Text('Please add a location'),
+                        ),
+                      ),
+                      builder: (ctx, placesProvider, ch) => placesProvider
+                              .places.isEmpty
+                          ? ch
+                          : ListView.builder(
+                              itemCount: placesProvider.places.length,
+                              itemBuilder: (ctx, i) => ListTile(
+                                leading: CircleAvatar(
+                                  backgroundImage:
+                                      FileImage(placesProvider.places[i].image),
+                                ),
+                                title:
+                                    Text('${placesProvider.places[i].title}'),
+                              ),
+                            ),
                     ),
-                    title: Text('${placesProvider.places[i].title}'),
-                  ),
-                ),
         ),
       ),
     );
