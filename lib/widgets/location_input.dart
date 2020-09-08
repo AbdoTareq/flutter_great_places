@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_great_places/helpers/location_helper.dart';
 import 'package:location/location.dart';
 
 class LocationInput extends StatefulWidget {
@@ -11,10 +12,14 @@ class LocationInput extends StatefulWidget {
 class _LocationInputState extends State<LocationInput> {
   String mapImageUrl;
 
-  Future<void> _getCurrentLocation()async {
+  Future<void> _getCurrentLocation() async {
     final myLocation = await Location().getLocation();
     print('dart mess: ${myLocation.longitude}');
     print('dart mess: ${myLocation.latitude}');
+    setState(() {
+      mapImageUrl = LocationHelper.generateLocationPreviewImage(
+          latitude: myLocation.latitude, longitude: myLocation.longitude);
+    });
   }
 
   @override
@@ -35,6 +40,7 @@ class _LocationInputState extends State<LocationInput> {
                 )
               : Image.network(
                   mapImageUrl,
+                  height: 78,
                   fit: BoxFit.cover,
                 ),
         ),
