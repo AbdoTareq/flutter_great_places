@@ -31,6 +31,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
     if (_controller.text.isEmpty ||
         _pickedImage == null ||
         _pickedLlocation == null) {
+      print(
+          'dart mess: ${_controller.text} ${_pickedImage}, ${_pickedLlocation}}');
       showDialog(
           context: context,
           builder: (ctx) => AlertDialog(

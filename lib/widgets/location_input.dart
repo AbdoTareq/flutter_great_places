@@ -69,7 +69,7 @@ class _LocationInputState extends State<LocationInput> {
         longitude: selectedLocation.longitude);
 
     _showPreview(pickedLocation);
-    widget.onSelectLocation();
+    widget.onSelectLocation(pickedLocation);
   }
 
   @override

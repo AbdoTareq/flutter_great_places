@@ -18,8 +18,9 @@ class LocationHelper {
     print('dart mess: ${json.decode(addressResponse.body)}');
     if (json.decode(addressResponse.body)['error_message'] ==
         'This API project is not authorized to use this API.') {
-      return '';
-    } else {}
-    return json.decode(addressResponse.body)['results'][0]['formatted_address'];
+      return 'This API project is not authorized to use this API.';
+    } else
+      return json.decode(addressResponse.body)['results'][0]
+          ['formatted_address'];
   }
 }

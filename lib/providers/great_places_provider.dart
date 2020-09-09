@@ -15,6 +15,7 @@ class GreatPlacesProvider extends ChangeNotifier {
       String title, File pickedImage, PlaceLocation pickedPlace) async {
     final placeAddress = await LocationHelper.getAddressFromLatLng(
         LatLng(pickedPlace.latitude, pickedPlace.longitude));
+
     final placeWithAddress = PlaceLocation(
         latitude: pickedPlace.latitude,
         longitude: pickedPlace.longitude,
@@ -36,6 +37,10 @@ class GreatPlacesProvider extends ChangeNotifier {
       'lng': newPlace.location.longitude,
       'address': newPlace.location.address,
     });
+  }
+
+  Place findPlaceById(String id) {
+    return _places.firstWhere((element) => element.id == id);
   }
 
   Future<void> fetchAndSetPlaces() async {

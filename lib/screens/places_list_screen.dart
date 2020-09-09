@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_great_places/providers/great_places_provider.dart';
 import 'package:flutter_great_places/screens/add_place_screen.dart';
+import 'package:flutter_great_places/screens/place_detail_screen.dart';
 import 'package:provider/provider.dart';
 
 class PlacesListScreen extends StatelessWidget {
@@ -39,6 +40,13 @@ class PlacesListScreen extends StatelessWidget {
                           : ListView.builder(
                               itemCount: placesProvider.places.length,
                               itemBuilder: (ctx, i) => ListTile(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (ctx) => PlaceDetailScreen(),
+                                      settings: RouteSettings(
+                                          arguments:
+                                              placesProvider.places[i].id)));
+                                },
                                 leading: CircleAvatar(
                                   backgroundImage:
                                       FileImage(placesProvider.places[i].image),
@@ -46,8 +54,8 @@ class PlacesListScreen extends StatelessWidget {
                                 title:
                                     Text('${placesProvider.places[i].title}'),
                                 subtitle: Text(
-                                  // we should use address not latitude but there is a problem in thre api key so no address returned
-                                    '${placesProvider.places[i].location.latitude}'),
+                                    // we should use address not latitude but there is a problem in thre api key so no address returned
+                                    '${placesProvider.places[i].location.latitude}\n${placesProvider.places[i].location.address}'),
                               ),
                             ),
                     ),
