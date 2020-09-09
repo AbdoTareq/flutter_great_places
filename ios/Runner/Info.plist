@@ -2,12 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+<!-- this for google maps setup -->
+	<key>io.flutter.embedded_views_preview</key>
+	</true>
+<!-- this for location permission -->
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need to access the location!</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We need to access the location!</string>
+<!-- this for location permission -->
 	<key>NSCameraUsageDescription</key>
 	<string>We need to access the camera!</string>
+	<!--  -->
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

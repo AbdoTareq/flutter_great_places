@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-const GOOGLE_API_KEY = 'PUT kEY HERE';
+const GOOGLE_API_KEY = 'AIzaSyDIudB5Cn0DoKHZa-0JxppyqfGsEYW2KnA';
 
 class LocationHelper {
   static String generateLocationPreviewImage(
