@@ -39,7 +39,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
               ));
       return;
     }
-    Provider.of<GreatPlacesProvider>(context,listen: false)
+    Provider.of<GreatPlacesProvider>(context, listen: false)
         .addPlace(_controller.text, _pickedImage);
     Navigator.of(context).pop();
   }
@@ -62,7 +62,6 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                     child: TextField(
                       decoration: InputDecoration(labelText: 'Title'),
                       controller: _controller,
-
                     ),
                   ),
                   ImageInput(_selectImage),

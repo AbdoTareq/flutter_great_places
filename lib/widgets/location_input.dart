@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_great_places/helpers/location_helper.dart';
+import 'package:flutter_great_places/screens/map_screen.dart';
 import 'package:location/location.dart';
 
 class LocationInput extends StatefulWidget {
@@ -20,6 +21,16 @@ class _LocationInputState extends State<LocationInput> {
       mapImageUrl = LocationHelper.generateLocationPreviewImage(
           latitude: myLocation.latitude, longitude: myLocation.longitude);
     });
+  }
+
+  Future<void> _selectOnMap() async {
+    final selectedLocation = await Navigator.of(context).push(MaterialPageRoute(
+        builder: (ctx) => MapScreen(
+              isSelected: true,
+            )));
+    if (selectedLocation == null) {
+      return;
+    }
   }
 
   @override
@@ -55,7 +66,7 @@ class _LocationInputState extends State<LocationInput> {
                 ),
                 label: Text('Current Location')),
             FlatButton.icon(
-                onPressed: () {},
+                onPressed: _selectOnMap,
                 icon: Icon(
                   Icons.map,
                   color: Theme.of(context).primaryColor,

@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 
 class PlaceLocation {
-  double latitude;
-  double longitude;
-  String address;
-  PlaceLocation(
+  final double latitude;
+  final double longitude;
+  final String address;
+  const PlaceLocation(
       {@required this.latitude, @required this.longitude, this.address});
 }
 
@@ -17,5 +17,4 @@ class Place {
   final File image;
 
   Place({this.id, this.title, this.location, this.image});
-
 }
