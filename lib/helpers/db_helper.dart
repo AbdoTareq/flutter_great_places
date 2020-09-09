@@ -9,7 +9,8 @@ class DBHelper {
     return sql.openDatabase(path.join(dbPath, 'places.db'),
         onCreate: (db, version) {
       return db.execute(
-          'CREATE TABLE $tableName(id TEXT PRIMARY KEY,title TEXT,image TEXT)');
+          // REAL is like double for DB
+          'CREATE TABLE $tableName(id TEXT PRIMARY KEY,title TEXT,image TEXT,lat REAL,lng REAL,address TEXT)');
     }, version: 1);
   }
 

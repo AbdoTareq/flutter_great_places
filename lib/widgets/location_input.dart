@@ -2,11 +2,16 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_great_places/helpers/location_helper.dart';
+import 'package:flutter_great_places/models/place.dart';
 import 'package:flutter_great_places/screens/map_screen.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
 class LocationInput extends StatefulWidget {
+  final Function onSelectLocation;
+
+  const LocationInput(this.onSelectLocation);
+
   @override
   _LocationInputState createState() => _LocationInputState();
 }
@@ -15,12 +20,37 @@ class _LocationInputState extends State<LocationInput> {
   String mapImageUrl;
 
   Future<void> _getCurrentLocation() async {
-    final myLocation = await Location().getLocation();
+    try {
+      final myLocation = await Location().getLocation();
+      _showPreview(PlaceLocation(
+          latitude: myLocation.latitude, longitude: myLocation.longitude));
+      widget.onSelectLocation(PlaceLocation(
+          latitude: myLocation.latitude, longitude: myLocation.longitude));
+    } catch (e) {
+      showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+                title: Text('Location permission needed'),
+                content: Text('Please give Location permission!'),
+                actions: [
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('Ok'),
+                  )
+                ],
+              ));
+    }
+  }
+
+  void _showPreview(PlaceLocation myLocation) {
     print('dart mess: ${myLocation.longitude}');
     print('dart mess: ${myLocation.latitude}');
+    final imageUrl = LocationHelper.generateLocationPreviewImage(
+        latitude: myLocation.latitude, longitude: myLocation.longitude);
     setState(() {
-      mapImageUrl = LocationHelper.generateLocationPreviewImage(
-          latitude: myLocation.latitude, longitude: myLocation.longitude);
+      mapImageUrl = imageUrl;
     });
   }
 
@@ -34,6 +64,12 @@ class _LocationInputState extends State<LocationInput> {
       return;
     }
     print('dart mess: ${selectedLocation.latitude}');
+    final pickedLocation = PlaceLocation(
+        latitude: selectedLocation.latitude,
+        longitude: selectedLocation.longitude);
+
+    _showPreview(pickedLocation);
+    widget.onSelectLocation();
   }
 
   @override

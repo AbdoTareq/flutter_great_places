@@ -34,6 +34,9 @@ dependencies:
   location: ^3.0.0
   # official google maps
   google_maps_flutter: ^0.5.31
+  # to get address from LatLng with a http request 
+  http: ^0.12.2
+
 
 
 

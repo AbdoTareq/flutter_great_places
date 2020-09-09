@@ -45,6 +45,9 @@ class PlacesListScreen extends StatelessWidget {
                                 ),
                                 title:
                                     Text('${placesProvider.places[i].title}'),
+                                subtitle: Text(
+                                  // we should use address not latitude but there is a problem in thre api key so no address returned
+                                    '${placesProvider.places[i].location.latitude}'),
                               ),
                             ),
                     ),
