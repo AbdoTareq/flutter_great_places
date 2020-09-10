@@ -47,9 +47,12 @@ class PlacesListScreen extends StatelessWidget {
                                           arguments:
                                               placesProvider.places[i].id)));
                                 },
-                                leading: CircleAvatar(
-                                  backgroundImage:
-                                      FileImage(placesProvider.places[i].image),
+                                leading: Hero(
+                                  tag: '${placesProvider.places[i].id}',
+                                  child: CircleAvatar(
+                                    backgroundImage: FileImage(
+                                        placesProvider.places[i].image),
+                                  ),
                                 ),
                                 title:
                                     Text('${placesProvider.places[i].title}'),
