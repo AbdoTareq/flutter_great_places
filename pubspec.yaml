@@ -47,6 +47,16 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  # not needed to be bundle in the app just in development to generate icons 
+  flutter_launcher_icons: ^0.8.0 
+  
+# flutter_launcher_icons settings  
+flutter_icons:
+  android: true  
+  ios: true
+  image_path: "dev_assets/places.png"
+  adaptive_icon_background: "#191919"
+  adaptive_icon_foreground: "dev_assets/places-adptive.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

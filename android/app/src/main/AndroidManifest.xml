@@ -5,11 +5,15 @@
          In most cases you can leave this as-is, but you if you want to provide
          additional functionality it is fine to subclass or reimplement
          FlutterApplication and put your custom class here. -->
-         
+
+         <!-- this permision is required when using internet to work on release  -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="flutter_great_places"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@drawable/places">
 
         <meta-data android:name="com.google.android.geo.API_KEY"
                       android:value="AIzaSyDIudB5Cn0DoKHZa-0JxppyqfGsEYW2KnA"/>
